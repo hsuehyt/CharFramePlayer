@@ -71,9 +71,10 @@ for char in characters:
         # Draw main character
         bbox = font.getbbox(char)
         w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
+        center_y = (frame_size[1] // 2) - 50  # visual center of character block
         position = (
             (frame_size[0] - w) // 2 - bbox[0],
-            (frame_size[1] - h) // 2 - bbox[1] - 100  # Shift up for subtitle space
+            center_y - (h // 2) - bbox[1]
         )
         draw.text(position, char, font=font, fill="white")
 
