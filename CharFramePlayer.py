@@ -78,10 +78,10 @@ for char in characters:
         if subtitle:
             subtitle_font_size = 64
             subtitle_font = ImageFont.truetype(font_path, subtitle_font_size)
-            sw, sh = subtitle_font.getsize(subtitle)
+            sw = subtitle_font.getlength(subtitle)
             subtitle_position = (
                 (frame_size[0] - sw) // 2,
-                frame_size[1] - sh - 50  # 50px from bottom
+                frame_size[1] - 100  # Fixed Y position from bottom
             )
             draw.text(subtitle_position, subtitle, font=subtitle_font, fill="lightgray")
 
