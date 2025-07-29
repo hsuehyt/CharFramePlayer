@@ -85,7 +85,7 @@ for char in characters:
             sw = subtitle_font.getlength(subtitle)
             subtitle_position = (
                 (frame_size[0] - sw) // 2,
-                frame_size[1] - 100  # Fixed 100px from bottom
+                frame_size[1] - 125  # Fixed 125px from bottom
             )
             draw.text(subtitle_position, subtitle, font=subtitle_font, fill="lightgray")
 
