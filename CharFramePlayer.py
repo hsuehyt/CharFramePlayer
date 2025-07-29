@@ -6,9 +6,13 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 characters_txt_path = os.path.join(base_dir, "characters.txt")
 subtitle_path = os.path.join(base_dir, "characters_subtitles.txt")
 output_path = os.path.join(base_dir, "character_loop.gif")
-font_path = "C:/Users/user/AppData/Local/Microsoft/Windows/Fonts/NotoSansCJKtc-Bold.otf"  # Adjust if needed
+
+# === Font settings ===
+main_font_path = "C:/Users/user/AppData/Local/Microsoft/Windows/Fonts/NotoSansCJKtc-Bold.otf"
+subtitle_font_path = "C:/Windows/Fonts/arial.ttf"
 
 font_size = 800
+subtitle_font_size = 48
 frame_size = (1080, 1080)
 duration_per_frame = 200  # in milliseconds
 
@@ -62,26 +66,25 @@ for char in characters:
     img = Image.new("RGB", frame_size, color="black")
     if char != "§EMPTY§":
         draw = ImageDraw.Draw(img)
-        font = ImageFont.truetype(font_path, font_size)
+        font = ImageFont.truetype(main_font_path, font_size)
 
         # Draw main character
         bbox = font.getbbox(char)
         w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
         position = (
             (frame_size[0] - w) // 2 - bbox[0],
-            (frame_size[1] - h) // 2 - bbox[1] - 100  # shift up slightly for subtitle
+            (frame_size[1] - h) // 2 - bbox[1] - 100  # Shift up for subtitle space
         )
         draw.text(position, char, font=font, fill="white")
 
         # Draw subtitle if available
         subtitle = char_subtitles.get(char)
         if subtitle:
-            subtitle_font_size = 64
-            subtitle_font = ImageFont.truetype(font_path, subtitle_font_size)
+            subtitle_font = ImageFont.truetype(subtitle_font_path, subtitle_font_size)
             sw = subtitle_font.getlength(subtitle)
             subtitle_position = (
                 (frame_size[0] - sw) // 2,
-                frame_size[1] - 100  # Fixed Y position from bottom
+                frame_size[1] - 100  # Fixed 100px from bottom
             )
             draw.text(subtitle_position, subtitle, font=subtitle_font, fill="lightgray")
 
